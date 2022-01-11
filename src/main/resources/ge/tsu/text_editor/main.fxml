@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.input.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
+<?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ge.tsu.text_editor.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ge.tsu.text_editor.MainController">
     <center>
         <TextArea fx:id="textArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER" />
     </center>
@@ -23,12 +18,16 @@
                                 <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
-                        <MenuItem mnemonicParsing="false" onAction="#onOpen" text="Open">
+                  <MenuItem mnemonicParsing="false" text="New Window">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#onOpen" text="Open...">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
-                        <MenuItem mnemonicParsing="false" onAction="#onSave" text="Save">
+                        <MenuItem mnemonicParsing="false" onAction="#onSave" text="Save As...">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
@@ -38,6 +37,24 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
+                  <MenuItem mnemonicParsing="false" text="Cut">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" text="Copy">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" text="Paste">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" text="Delete" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Find...">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="F" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                         <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Time/Date" />
                     </items>
                 </Menu>
@@ -49,10 +66,14 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="View">
                     <items>
-
-                        <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Zoom In" />
-                        <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Zoom Out" />
-                        <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Zoom" />
+                  <Menu mnemonicParsing="false" text="Zoom">
+                    <items>
+      
+                              <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Zoom In" />
+                              <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Zoom Out" />
+                    </items>
+                  </Menu>
+                        <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Status Bar" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
