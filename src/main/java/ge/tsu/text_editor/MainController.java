@@ -11,9 +11,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Optional;
 
 public class MainController {
 
@@ -44,9 +46,21 @@ public class MainController {
     @FXML
     private void onNew(ActionEvent e) {
         // TODO if currentFile or textArea is not empty, show the question prompt
-        currentFile = null;
-        clearTitle();
-        textArea.clear();
+        if(textArea.getText().length() > 0) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "text in this file will be lost!",
+                    ButtonType.YES, ButtonType.CANCEL);
+            alert.setTitle("Confirmation");
+            alert.setResizable(false);
+            alert.setContentText("Do you want to continue?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent()) {
+                if (result.get() == ButtonType.YES) {
+                    currentFile = null;
+                    clearTitle();
+                    textArea.clear();
+                }
+            }
+        }
     }
 
     @FXML

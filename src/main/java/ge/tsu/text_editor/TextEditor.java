@@ -1,6 +1,5 @@
 package ge.tsu.text_editor;
 
-import ge.tsu.text_editor.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,6 +33,7 @@ public class TextEditor extends Application {
         controller.setAboutRoot(aboutRoot);
 
         Scene scene = new Scene(mainRoot, 500, 400);
+        //TODO თაითლი გასატანია ცალკე ცვლადად და onNew მეთოდის ალერტშიც უნდა გამოვიყენოთ
         stage.setTitle("Untitled - Notepad");
         stage.setScene(scene);
         stage.setMinWidth(400);
