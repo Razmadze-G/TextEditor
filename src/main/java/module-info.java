@@ -3,6 +3,6 @@ module com.example.text_editor {
     requires javafx.fxml;
 
 
-    opens com.example.text_editor to javafx.fxml;
-    exports com.example.text_editor;
+    opens ge.tsu.text_editor to javafx.fxml;
+    exports ge.tsu.text_editor;
 }
