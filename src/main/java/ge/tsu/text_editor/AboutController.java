@@ -5,10 +5,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static java.util.Objects.requireNonNull;
 
 public class AboutController implements Initializable {
 
@@ -17,12 +17,7 @@ public class AboutController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println(Thread.currentThread().getName());
-        try (InputStream inputStream = AboutController.class.getResourceAsStream("/ge/tsu/text_editor/windows10.jpg")) {
-            Image image = new Image(inputStream);
-            imgView.setImage(image);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Image image = new Image(requireNonNull(AboutController.class.getResourceAsStream("/ge/tsu/text_editor/windows10.jpg")));
+        imgView.setImage(image);
     }
 }

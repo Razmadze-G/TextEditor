@@ -4,15 +4,17 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 public class TextEditor extends Application {
+    public static String fileTitle = "Untitled";
+
     @Override
     public void start(Stage stage) throws IOException {
-
         System.out.println(Thread.currentThread().getName());
 
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -34,10 +36,12 @@ public class TextEditor extends Application {
 
         Scene scene = new Scene(mainRoot, 500, 400);
         //TODO თაითლი გასატანია ცალკე ცვლადად და onNew მეთოდის ალერტშიც უნდა გამოვიყენოთ
-        stage.setTitle("Untitled - Notepad");
+        stage.setTitle(fileTitle + " - Notepad");
         stage.setScene(scene);
-        stage.setMinWidth(400);
-        stage.setMinHeight(300);
+        stage.setHeight(550);
+        stage.setWidth(650);
+        stage.setX((Screen.getPrimary().getBounds().getWidth()/2)-(stage.getWidth()/2));
+        stage.setY((Screen.getPrimary().getBounds().getHeight()/2)-(stage.getHeight()/2));
         stage.show();
     }
 

@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -16,6 +17,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
+
+import static ge.tsu.text_editor.TextEditor.fileTitle;
 
 public class MainController {
 
@@ -45,9 +48,10 @@ public class MainController {
 
     @FXML
     private void onNew(ActionEvent e) {
-        // TODO if currentFile or textArea is not empty, show the question prompt
+        //TODO ტექსტია შესაცვლელი. გვჭირდება, რომ ტექსტში ფაილის სახელი იყოს ნახსენები.
         if(textArea.getText().length() > 0) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "text in this file will be lost!",
+            DialogPane dp = new DialogPane();
+            Alert alert = new Alert(Alert.AlertType.NONE, "Text of will be lost!",
                     ButtonType.YES, ButtonType.CANCEL);
             alert.setTitle("Confirmation");
             alert.setResizable(false);
@@ -64,6 +68,11 @@ public class MainController {
     }
 
     @FXML
+    private void onNewWindow(ActionEvent e) throws IOException {
+        new TextEditor().start(new Stage());
+    }
+
+    @FXML
     private void onOpen(ActionEvent e) throws IOException {
         File selectedFile = fileOpenChooser.showOpenDialog(stage);
         if (selectedFile != null) {
@@ -75,6 +84,13 @@ public class MainController {
 
     @FXML
     private void onSave(ActionEvent e) throws IOException {
+        if(!fileTitle.equals("Untitled"))
+            Files.writeString(currentFile, textArea.getText());
+        else onSaveAs(e);
+    }
+
+    @FXML
+    private void onSaveAs(ActionEvent e) throws IOException {
         File selectedFile = fileSaveChooser.showSaveDialog(stage);
         if (selectedFile != null) {
             currentFile = selectedFile.toPath();
@@ -102,19 +118,13 @@ public class MainController {
     }
 
     private void setTitleToCurrentFile() {
-        setTitle(currentFile.getFileName().toString());
+        fileTitle = currentFile.getFileName().toString();
+        stage.setTitle(fileTitle + " - Notepad");
     }
 
     private void clearTitle() {
-        setTitle(null);
-    }
-
-    private void setTitle(String title) {
-        if (title != null) {
-            stage.setTitle(title + " - Notepad");
-        } else {
-            stage.setTitle("Untitled - Notepad");
-        }
+        fileTitle = "Untitled";
+        stage.setTitle(fileTitle + " - Notepad");
     }
 
     public void setStage(Stage stage) {
