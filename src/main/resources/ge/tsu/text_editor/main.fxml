@@ -4,98 +4,87 @@
 <?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ge.tsu.text_editor.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ge.tsu.text_editor.MainController">
     <center>
-        <TextArea fx:id="textArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                  BorderPane.alignment="CENTER"/>
+        <TextArea fx:id="textArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER" />
     </center>
     <top>
         <MenuBar BorderPane.alignment="CENTER">
-            <Menu mnemonicParsing="false" text="File">
-
-                <MenuItem mnemonicParsing="false" onAction="#onNew" text="New">
-                    <accelerator>
-                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
-                    </accelerator>
-                </MenuItem>
-                <MenuItem mnemonicParsing="false" onAction="#onNewWindow" text="New Window">
-                    <accelerator>
-                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="DOWN" shortcut="UP"/>
-                    </accelerator>
-                </MenuItem>
-                <MenuItem mnemonicParsing="false" onAction="#onOpen" text="Open...">
-                    <accelerator>
-                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
-                    </accelerator>
-                </MenuItem>
-                <MenuItem mnemonicParsing="false" onAction="#onSave" text="Save">
-                    <accelerator>
-                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
-                    </accelerator>
-                </MenuItem>
-                <MenuItem mnemonicParsing="false" onAction="#onSaveAs" text="Save As...">
-                    <accelerator>
-                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP"/>
-                    </accelerator>
-                </MenuItem>
-                <MenuItem mnemonicParsing="false" onAction="#onExit" text="Exit"/>
-
-            </Menu>
-            <Menu mnemonicParsing="false" text="Edit">
-
-                <MenuItem mnemonicParsing="false" text="Cut">
-                    <accelerator>
-                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
-                    </accelerator>
-                </MenuItem>
-                <MenuItem mnemonicParsing="false" text="Copy">
-                    <accelerator>
-                        <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
-                    </accelerator>
-                </MenuItem>
-                <MenuItem mnemonicParsing="false" text="Paste">
-                    <accelerator>
-                        <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
-                    </accelerator>
-                </MenuItem>
-                <MenuItem mnemonicParsing="false" text="Delete"/>
-                <SeparatorMenuItem mnemonicParsing="false"/>
-                <MenuItem mnemonicParsing="false" text="Find...">
-                    <accelerator>
-                        <KeyCodeCombination alt="UP" code="F" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
-                    </accelerator>
-                </MenuItem>
-                <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Time/Date"/>
-
-            </Menu>
-            <Menu mnemonicParsing="false" text="Format">
-
-                <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Word Wrap"/>
-                <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Font..."/>
-
-            </Menu>
-            <Menu mnemonicParsing="false" text="View">
-
-                <Menu mnemonicParsing="false" text="Zoom">
-
-
-                    <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Zoom In"/>
-                    <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Zoom Out"/>
-
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#onNew" text="New">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onNewWindow" text="New Window">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#onOpen" text="Open...">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#onSave" text="Save As...">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#onExit" text="Exit" />
+                    </items>
                 </Menu>
-                <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Status Bar"/>
-
-            </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-
-                <MenuItem mnemonicParsing="false" onAction="#onAbout" text="About Notepad"/>
-
-            </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                  <MenuItem mnemonicParsing="false" text="Cut">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" text="Copy">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" text="Paste">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" text="Delete" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Find...">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="F" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Time/Date" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Format">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Word Wrap" />
+                        <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Font..." />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="View">
+                    <items>
+                  <Menu mnemonicParsing="false" text="Zoom">
+                    <items>
+      
+                              <MenuItem mnemonicParsing="false" onAction="#OnZoomIn" text="Zoom In" />
+                              <MenuItem mnemonicParsing="false" onAction="#OnZoomOut" text="Zoom Out" />
+                    </items>
+                  </Menu>
+                        <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Status Bar" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#onAbout" text="About Notepad" />
+                    </items>
+                </Menu>
+            </menus>
         </MenuBar>
     </top>
     <bottom>
-        <ToolBar BorderPane.alignment="CENTER"/>
+        <ToolBar BorderPane.alignment="CENTER" />
     </bottom>
 </BorderPane>

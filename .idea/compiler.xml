@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Text_Editor" target="17" />
+      <module name="Text_Editor" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>
