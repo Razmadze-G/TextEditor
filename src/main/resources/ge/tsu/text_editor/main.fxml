@@ -27,9 +27,14 @@
                                 <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
-                        <MenuItem mnemonicParsing="false" onAction="#onSave" text="Save As...">
+                        <MenuItem mnemonicParsing="false" onAction="#onSave" text="Save">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#onSaveAs" text="Save As...">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
                         <MenuItem mnemonicParsing="false" onAction="#onExit" text="Exit" />
@@ -37,25 +42,34 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                  <MenuItem mnemonicParsing="false" text="Cut">
+                  <MenuItem mnemonicParsing="false" onAction="#onCut" text="Cut">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Copy">
+                  <MenuItem mnemonicParsing="false" onAction="#onCopy" text="Copy">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Paste">
+                  <MenuItem mnemonicParsing="false" onAction="#onPaste" text="Paste">
                      <accelerator>
-                        <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator></MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Delete" />
+                        <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#onDelete" text="Delete">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="DELETE" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                        </accelerator>
+                  </MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Find...">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="F" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-                        <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Time/Date" />
+                        <MenuItem mnemonicParsing="false" onAction="#getTimeDate" text="Time/Date">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="F5" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                        </MenuItem>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Format">
@@ -74,6 +88,10 @@
                     </items>
                   </Menu>
                         <MenuItem mnemonicParsing="false" onAction="#onAbout" text="Status Bar" />
+                        <MenuItem mnemonicParsing="false" text="Dark Mode">
+                     <graphic>
+                        <CheckBox id="chckbox" mnemonicParsing="false" onAction="#setDarkMode" />
+                     </graphic></MenuItem>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

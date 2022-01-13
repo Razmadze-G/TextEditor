@@ -4,20 +4,27 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextArea;
+
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import static ge.tsu.text_editor.TextEditor.fileTitle;
@@ -25,13 +32,16 @@ import static ge.tsu.text_editor.TextEditor.fileTitle;
 public class MainController {
 
     private Stage stage;
-    protected int fontSize = 18;
+    private int fontSize = 18;
+    private boolean isDark = false;
     private final FileChooser fileOpenChooser;
     private final FileChooser fileSaveChooser;
 
     private Path currentFile = null;
     private Parent aboutRoot;
-
+    private Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
+    int caretPosition = 0;
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
 
     public MainController() {
         // File open chooser
@@ -81,16 +91,6 @@ public class MainController {
     @FXML
     private void onNewWindow(ActionEvent e) throws IOException {
         new TextEditor().start(new Stage());
-//
-//        Scene scene = new Scene(mainRoot, 500, 400);
-//        //TODO თაითლი გასატანია ცალკე ცვლადად და onNew მეთოდის ალერტშიც უნდა გამოვიყენოთ
-//        stage.setTitle(fileTitle + " - Notepad");
-//        stage.setScene(scene);
-//        stage.setHeight(550);
-//        stage.setWidth(650);
-//        stage.setX((Screen.getPrimary().getBounds().getWidth()/2)-(stage.getWidth()/2));
-//        stage.setY((Screen.getPrimary().getBounds().getHeight()/2)-(stage.getHeight()/2));
-//        stage.show();
     }
 
     @FXML
@@ -130,13 +130,13 @@ public class MainController {
     @FXML
     private void OnZoomIn(ActionEvent e) {
         fontSize+=2;
-        textArea.setStyle("-fx-font-size: " + fontSize);
+        textArea.setStyle("-fx-text-fill:white; -fx-font-size: " + fontSize);
     }
 
     @FXML
     private void OnZoomOut(ActionEvent e) {
         fontSize-=2;
-        textArea.setStyle("-fx-font-size: " + fontSize);
+        textArea.setStyle("-fx-text-fill:white; -fx-font-size: " + fontSize);
 
     }
 
@@ -146,7 +146,36 @@ public class MainController {
     }
 
     @FXML
-    private void onAbout(ActionEvent actionEvent) {
+    private void onCopy(ActionEvent e) {
+        cb.setContents(new StringSelection(textArea.getSelectedText()),null);
+    }
+
+    @FXML
+    private void onCut(ActionEvent e) throws IndexOutOfBoundsException {
+        onCopy(e);
+        textArea.replaceSelection("");
+    }
+
+    @FXML
+    private void onPaste(ActionEvent e) throws IOException, UnsupportedFlavorException {
+        updateCaretPosition();
+        textArea.insertText(caretPosition, (String) cb.getData(DataFlavor.stringFlavor));
+    }
+
+    @FXML
+    private void onDelete(ActionEvent e){
+        textArea.replaceSelection("");
+    }
+
+    @FXML
+    private void getTimeDate(ActionEvent e){
+        LocalDateTime now = LocalDateTime.now();
+        updateCaretPosition();
+        textArea.insertText(caretPosition, dtf.format(now));
+    }
+
+    @FXML
+    private void onAbout(ActionEvent e) {
         Alert alert = new Alert(Alert.AlertType.NONE, "This is a dummy Notepad application",
                 ButtonType.OK);
         alert.setTitle("About Notepad");
@@ -154,10 +183,24 @@ public class MainController {
         alert.showAndWait();
     }
 
-    public TextArea getTextArea() {
-        return textArea;
+    @FXML
+    private void setDarkMode(ActionEvent e){
+        if(!isDark){
+            stage.getScene().getRoot().setStyle("-fx-base:black");
+            textArea.setStyle("-fx-text-fill:white; -fx-font-size: " + fontSize);
+            isDark = true;
+        }else
+        {
+            stage.getScene().getRoot().setStyle("-fx-base:white");
+            textArea.setStyle("-fx-text-fill:black; -fx-font-size: " + fontSize);
+            isDark = false;
+        }
     }
 
+
+    private void updateCaretPosition(){
+        caretPosition = textArea.getCaretPosition();
+    }
     private void setTitleToCurrentFile() {
         fileTitle = currentFile.getFileName().toString();
         stage.setTitle(fileTitle + " - Notepad");
