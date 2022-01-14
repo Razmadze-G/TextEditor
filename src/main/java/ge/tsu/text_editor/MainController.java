@@ -21,27 +21,30 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.Properties;
 
 import static ge.tsu.text_editor.TextEditor.fileTitle;
 
 public class MainController {
 
     private Stage stage;
-    private int fontSize = 18;
+    private int fontSize;
     private boolean isDark = false;
     private final FileChooser fileOpenChooser;
     private final FileChooser fileSaveChooser;
+    private Properties prop = new Properties();
 
     private Path currentFile = null;
     private Parent aboutRoot;
     private Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
-    int caretPosition = 0;
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
+    private int caretPosition = 0;
+    private DateTimeFormatter dtf;
 
     public MainController() {
         // File open chooser
@@ -197,13 +200,28 @@ public class MainController {
         }
     }
 
+    public void setProp() throws IOException {
+        try(InputStream inputStream = MainController.class.getResourceAsStream("/properties/props.properties")){
+            prop.load(inputStream);
+            dtf = DateTimeFormatter.ofPattern(prop.getProperty("dateTime.format"));
+            fontSize = Integer.parseInt(prop.getProperty("font.size"));
+        }catch (IOException ex){
+            System.out.println("Resource path is NOT correct. " + ex.toString());
+        }
+    }
+
 
     private void updateCaretPosition(){
         caretPosition = textArea.getCaretPosition();
     }
+
     private void setTitleToCurrentFile() {
         fileTitle = currentFile.getFileName().toString();
         stage.setTitle(fileTitle + " - Notepad");
+    }
+
+    public Properties getProp(){
+        return prop;
     }
 
     private void clearTitle() {
@@ -211,7 +229,7 @@ public class MainController {
         stage.setTitle(fileTitle + " - Notepad");
     }
 
-    public void setStage(Stage stage) {
+    public void setStage(Stage stage) throws IOException {
         this.stage = stage;
         textArea.setStyle("-fx-font-size: " + fontSize);
     }
