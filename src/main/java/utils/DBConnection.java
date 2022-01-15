@@ -3,9 +3,6 @@ package utils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.*;
-import java.util.Objects;
-
-import static java.util.Objects.requireNonNull;
 
 @Slf4j
 public class DBConnection {
@@ -33,7 +30,6 @@ public class DBConnection {
                 SET CONTENT = ?
                 WHERE NAME = ?;
                 """;
-        String answer = "";
         try {
             Connection conn = DriverManager.getConnection("jdbc:h2:file:C:/Users/razma/IdeaProjects/TextEditor/src/main/resources/DataBase/myDB", "sa", "");
             PreparedStatement prepStat = conn.prepareStatement(query);

@@ -93,7 +93,7 @@ public class MainController {
     }
 
     @FXML
-    private void onNewWindow(){
+    private void onNewWindow() {
         new TextEditor().start(new Stage());
         log.info("user opened new window");
     }
@@ -252,5 +252,4 @@ public class MainController {
     public Properties getProp(){
         return prop;
     }
-
 }
