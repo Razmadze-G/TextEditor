@@ -5,16 +5,8 @@
 <?import javafx.scene.layout.*?>
 
 
-<BorderPane fx:controller="ge.tsu.text_editor.AboutController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
-    <top>
-        <VBox BorderPane.alignment="CENTER">
-            <children>
-                <ImageView fx:id="imgView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                <Separator prefWidth="200.0" />
-            </children>
-        </VBox>
-    </top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
     <center>
-        <Label text="This is my super Notepad" BorderPane.alignment="CENTER" />
+        <Label text="This is my epic Notepad--" BorderPane.alignment="CENTER" />
     </center>
 </BorderPane>
